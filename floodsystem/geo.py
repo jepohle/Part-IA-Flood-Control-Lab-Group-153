@@ -15,6 +15,6 @@ def stations_by_distance(stations, p):
 
     list_by_distance = []
     for station in stations: ## distances in km
-        distance = 2 * 3671 * np.sqrt(np.sin((station.coord[0] - p[0])*np.pi/360)**2 + np.cos(station.coord[0])*np.cos(p[0])*(np.sin((station.coord[1] - p[1])*np.pi/360)**2))
+        distance = 2 * 3671 *np.sqrt(np.abs(np.sin((station.coord[0] - p[0])*np.pi/360)**2 + np.cos(station.coord[0])*np.cos(p[0])*(np.sin((station.coord[1] - p[1])*np.pi/360)**2)))
         list_by_distance.append((station, distance))
     return sorted_by_key(list_by_distance,1)
