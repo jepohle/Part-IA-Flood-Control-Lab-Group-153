@@ -8,8 +8,9 @@ def test_stations_by_distance():
     x = build_station_list()
     sorted = stations_by_distance(x, (51.5072, -0.1276))
     sortedfirst = sorted[0]
+    sortedfirststation = sortedfirst[0]
     sortedsecond = sorted[1]
-    assert sortedfirst.town == 'Streatham'
+    assert sortedfirststation.town == 'Streatham'
     assert sortedfirst[1] - sortedsecond[1] > 0
 
 
