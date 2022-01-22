@@ -11,6 +11,8 @@ def run():
         tuple = (my_station.name, my_station.town, station_and_distance[1])
         list.append(tuple)
     print(list)
+
+    
 if __name__ == "__main__":
     print("*** Task 1B: CUED Part IA Flood Warning System ***")
     run()
