@@ -7,4 +7,4 @@ The activity is documented at
 https://cued-partia-flood-warning.readthedocs.io/. Fork this repository
 to start the activity.
 
-This is the fork for lab group 153: Kirill Kaliteevskiy (kk753) and Jeremias Pohle (jep78). I made a chnge
+This is the fork for lab group 153: Kirill Kaliteevskiy (kk753) and Jeremias Pohle (jep78). more change 
