@@ -24,3 +24,9 @@ def calc_distance(station, p):
     return 2 * 6371 *np.sqrt(np.sin((station.coord[0] - p[0]) * np.pi/360)**2 + np.cos(station.coord[0] * np.pi/180)
     *np.cos(p[0]*np.pi/180)*(np.sin((station.coord[1] - p[1])*np.pi/360)**2))
 
+def stations_within_radius(stations, center, r):
+    list = []
+    for station in stations:
+        if(calc_distance(station, center) <= r):
+            list.append(station)
+    return list
