@@ -46,11 +46,19 @@ class MonitoringStation:
             return False
     
     def typical_range_consistent(self):
-        low = self.typical_range[0]
-        high = self.typical_range[1]
         if self.typical_range == None:
             return False
-        elif low > high:
+        low = self.typical_range[0]
+        high = self.typical_range[1]
+        if low > high:
             return False
         elif high > low:
             return True
+
+def inconsistent_typical_range_stations(stations):
+    """Function that takes a list of station objects and returns a list of station objects with faulty range data."""
+    l = []
+    for station in stations:
+        if station.typical_range_consistent() == False:
+            l.append(station)
+    return l
