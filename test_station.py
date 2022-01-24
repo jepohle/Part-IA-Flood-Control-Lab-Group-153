@@ -60,7 +60,7 @@ def test_typical_range_consistent():
 
     assert s.typical_range_consistent() == True
     assert fs.typical_range_consistent() == False
-    assert ms.typical_range_consistent() == None
+    assert ms.typical_range_consistent() == False
 
 def test_inconsistent_typical_range_stations():
     # Create a consistent station
