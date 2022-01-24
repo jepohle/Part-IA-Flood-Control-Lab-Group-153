@@ -21,10 +21,15 @@ def stations_by_distance(stations, p):
 
 
 def calc_distance(station, p):
+    """Calculates the distance of stations in a list of station objects from a center point p (latitude, longitude).
+    This function has form calc_distance(list of station object, coordinate of center) """
     return 2 * 6371 *np.sqrt(np.sin((station.coord[0] - p[0]) * np.pi/360)**2 + np.cos(station.coord[0] * np.pi/180)
     *np.cos(p[0]*np.pi/180)*(np.sin((station.coord[1] - p[1])*np.pi/360)**2))
 
 def stations_within_radius(stations, center, r):
+    """Returns list of station objects from a list of station objects within a certain radius r (in km) 
+    of a coordinate tuple 'center' (latitude, longitude). This function has form stations_within_radius(list of station objects, coordinates of center,
+    radius in km)."""
     list = []
     for station in stations:
         if(calc_distance(station, center) <= r):
