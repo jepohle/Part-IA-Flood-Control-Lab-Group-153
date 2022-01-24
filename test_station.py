@@ -25,3 +25,40 @@ def test_create_monitoring_station():
     assert s.typical_range == trange
     assert s.river == river
     assert s.town == town
+
+def test_typical_range_consistent():
+    # Create a consistent station
+    s_id = "test-s-id"
+    m_id = "test-m-id"
+    label = "some station"
+    coord = (-2.0, 4.0)
+    trange = (-2.3, 3.4445)
+    river = "River X"
+    town = "My Town"
+    s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+
+    # Create an inconsistent station
+    s_id = "test-s-id"
+    m_id = "test-m-id"
+    label = "some station"
+    coord = (-2.0, 4.0)
+    trange = (2.3, -3.4445)
+    river = "River X"
+    town = "My Town"
+    fs = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+      
+    # Create an station with missing range data
+    s_id = "test-s-id"
+    m_id = "test-m-id"
+    label = "some station"
+    coord = (-2.0, 4.0)
+    trange = None
+    river = "River X"
+    town = "My Town"
+    ms = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+
+
+    assert s.typical_range_consistent() == True
+    assert fs.typical_range_consistent() == False
+    assert ms.typical_range_consistent() == None
+
