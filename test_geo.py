@@ -1,5 +1,5 @@
 from floodsystem.stationdata import build_station_list
-from floodsystem.geo import stations_by_distance
+from floodsystem.geo import stations_by_distance, stations_within_radius
 from floodsystem.geo import stations_by_river
 from floodsystem.geo import rivers_with_station
 
@@ -26,6 +26,16 @@ def test_stations_by_river():
     stations = stations_by_river(x)
     assert type(stations) == dict
 
+def test_station_within_radius():
+    stations = build_station_list()
+    stations_within_10k = stations_within_radius(stations, (52.2053, 0.1218) , 10)
+    id_list = []
+    for station in stations_within_10k:
+        id_list.append(station.name)
+    id_list.sort()
+    assert id_list == ['Bin Brook', 'Cambridge Baits Bite', "Cambridge Byron's Pool",
+ 'Cambridge Jesus Lock', 'Comberton', 'Dernford', 'Girton',
+ 'Haslingfield Burnt Mill', 'Lode', 'Oakington', 'Stapleford']
 
 
     
