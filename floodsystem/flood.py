@@ -6,10 +6,10 @@ def stations_level_over_threshold(stations, tol):
     have a flood level higher than the tolerance. It takes form stations_level_over_threshold(list of station objects, tolerance (float))."""
     list = []
     for station in stations:
-        if station.relative_water_level() == None:
+        rellevel = station.relative_water_level()
+        if rellevel == None:
             continue
-        elif station.relative_water_level() > tol:
-            list += (station, station.relative_water_level())
-    sorted_by_key(list, 1)
-    return list
+        elif rellevel > tol:
+            list.append((station, station.relative_water_level()))
+    return sorted_by_key(list, 1, reverse=True)
 
