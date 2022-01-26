@@ -6,6 +6,9 @@ geographical data.
 
 """
 import numpy as np
+import collections
+
+from sortedcollections import SortedDict
 from floodsystem.utils import sorted_by_key  # noqa
 
 
@@ -49,3 +52,29 @@ def stations_by_river(stations):
     for station in stations:
         dictionary[station.river].append(station)               #append the empty dictionary with the respective station objects
     return dictionary
+
+def rivers_by_station_number(stations, N):
+    """Returns N rivers with the gratest number of monitoring stations on them, given the list of stations(stations) and the number of stations required (N)
+    if more than one river have as many monitoring stations as the Nth entry, those rivers are included in the list
+    The data is returned in the form of a list of tuples, where each tuple contains the river name and the number of monitoring stations (river name, numer of stations)"""
+    stations_by_river = {}
+    for station in stations:
+        try:
+            stations_by_river[station.river] = stations_by_river[station.river] + 1
+        except:
+            stations_by_river[station.river] = 1
+    
+    ls = []
+    for key, value in stations_by_river.items():
+        ls.append((key, value))
+    
+    ls = sorted_by_key(ls, 1, True)
+    boundary = ls[N][1]
+    rivers_final = []
+    for item in ls:
+        if(item[1] >= boundary):rivers_final.append(item)
+    
+    return rivers_final
+
+
+
