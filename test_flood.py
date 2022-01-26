@@ -3,9 +3,9 @@ from floodsystem.flood import stations_level_over_threshold
 
 def test_stations_level_over_threshold():
     x = build_station_list()
-    stations_level_over_threshold(x, 0.5)
+    station = stations_level_over_threshold(x, 0.5)
     levels = []
-    for i in x:
+    for i in station:
         levels.append(i[1])
     for value in levels:
         assert  value > 0.5
