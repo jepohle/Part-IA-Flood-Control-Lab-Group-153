@@ -22,8 +22,6 @@ def stations_highest_rel_level(stations, N):
             continue
         else:
             list.append((station, station.relative_water_level()))
-    output = []
     listsorted = sorted_by_key(list, 1, reverse=True)
-    for i in N:
-        output.append(listsorted[i][1])
-    return output
+    output = [x[0] for x in listsorted]
+    return output[:N]
