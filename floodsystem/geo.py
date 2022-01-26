@@ -6,9 +6,6 @@ geographical data.
 
 """
 import numpy as np
-import collections
-
-from sortedcollections import SortedDict
 from floodsystem.utils import sorted_by_key  # noqa
 
 
