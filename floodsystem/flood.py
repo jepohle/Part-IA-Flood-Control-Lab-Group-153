@@ -23,6 +23,8 @@ def stations_highest_rel_level(stations, N):
         rellevel = station.relative_water_level()
         if rellevel == None:
             continue
+        if rellevel > 10:
+            continue
         else:
             list.append((station, station.relative_water_level()))
     listsorted = sorted_by_key(list, 1, reverse=True)
