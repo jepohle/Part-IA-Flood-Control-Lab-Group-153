@@ -13,7 +13,7 @@ def categorise_town_flood_risk(stations, dt, degree, risklevel=3, plot=False):
     of high flood risk and tol3 defines the lower boundary of moderate flood risk. Any towns with a flood risk index below tol3 are deemed to have a low risk of flooding. These tolerances are
     calculated internally by modelling the risks as a normal distribution. tol1 == mean + 2 * standard deviation, tol2 == mean + standard deviation, tol3 == mean. This is not an accurate warning
     system when all stations have risk of flooding, but it gives a good indication for stations that have a higher than normal increase in water level. The variable 'risklevel' sets the threshold for
-    returning endangered towns and can take values: 0, 1, 2, 3 in accordance to the classification mentioned above"""
+    returning endangered towns and can take values: 0, 1, 2, 3 in accordance to the classification mentioned above. "plot" enables or disabled plotting of the waterlevel with fitted polynomial for towns at risk."""
 
     towns = {}
     for station in stations:                                                                    #iterate through list of station objects and create dictionary of stations in a town
