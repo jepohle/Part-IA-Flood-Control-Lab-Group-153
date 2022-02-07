@@ -11,7 +11,8 @@ def categorise_town_flood_risk(stations, dt, degree, risklevel=3):
     The flood risk is determined by three tolerances (tol1, tol2, tol3) which are taken in as arguments. tol1 defines the lower boundary of severe flood risk. tol2 defines the lower boundary
     of high flood risk and tol3 defines the lower boundary of moderate flood risk. Any towns with a flood risk index below tol3 are deemed to have a low risk of flooding. These tolerances are
     calculated internally by modelling the risks as a normal distribution. tol1 == mean + 2 * standard deviation, tol2 == mean + standard deviation, tol3 == mean. This is not an accurate warning
-    system when all stations have risk of flooding, but it gives a good indication for stations that have a higher than normal increase in water level. The vara"""
+    system when all stations have risk of flooding, but it gives a good indication for stations that have a higher than normal increase in water level. The variable 'risklevel' sets the threshold for
+    returning endangered towns and can take values: 0, 1, 2, 3 in accordance to the classification mentioned above"""
 
     towns = {}
     for station in stations:                                                                    #iterate through list of station objects and create dictionary of stations in a town
@@ -64,5 +65,12 @@ def categorise_town_flood_risk(stations, dt, degree, risklevel=3):
     greatestrisks = []
     for town in townsandrisks:
         if town[1] >= risklevel:
-            greatestrisks.append(town)                                                  #return list of towns with severe flood risk
+            if town[1] == 3:
+                greatestrisks.append((town[0], 'severe'))
+            elif town[1] == 2:
+                greatestrisks.append((town[0], 'high'))
+            elif town[1] == 1:
+                greatestrisks.append((town[0], 'moderate'))
+            elif town[1] == 0:
+                greatestrisks.append((town[0], 'low'))                                            #return list of towns with severe flood risk
     return greatestrisks
