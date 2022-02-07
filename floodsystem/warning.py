@@ -1,12 +1,13 @@
+from os import truncate
 import matplotlib
 from floodsystem.analysis import polyfit
 from floodsystem.datafetcher import fetch_measure_levels
 import datetime
 import numpy as np
-
+from floodsystem.plot import plot_water_level_with_fit
 from floodsystem.utils import sorted_by_key
 
-def categorise_town_flood_risk(stations, dt, degree, risklevel=3):
+def categorise_town_flood_risk(stations, dt, degree, risklevel=3, plot=False):
     """A function that takes a list "stations" of station objects, performs polyfit over a period of "dt" days up to a "degree" degree and then returns towns with their respective flood risk.
     The flood risk is determined by three tolerances (tol1, tol2, tol3) which are taken in as arguments. tol1 defines the lower boundary of severe flood risk. tol2 defines the lower boundary
     of high flood risk and tol3 defines the lower boundary of moderate flood risk. Any towns with a flood risk index below tol3 are deemed to have a low risk of flooding. These tolerances are
@@ -73,4 +74,11 @@ def categorise_town_flood_risk(stations, dt, degree, risklevel=3):
                 greatestrisks.append((town[0], 'moderate'))
             elif town[1] == 0:
                 greatestrisks.append((town[0], 'low'))                                            #return list of towns with severe flood risk
+    for town in greatestrisks:
+        station = towns[town[0]][0]
+        dates, levels = fetch_measure_levels(station.measure_id, datetime.timedelta(dt))
+        if plot == True:
+            plot_water_level_with_fit(station, dates, levels, degree)
+        else:
+            continue 
     return greatestrisks
